@@ -2,26 +2,44 @@ package com.alexeyrand.juststudents.controller;
 
 
 import com.alexeyrand.juststudents.model.Student;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.alexeyrand.juststudents.service.StudentService;
+import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/students")
+@RequestMapping("/api/v1/student")
+@AllArgsConstructor
 public class StudentController {
+
+    private final StudentService service;
 
     @GetMapping
     public List<Student> findAllStudents() {
-        return List.of(
-                Student.builder().firstName("Alexey").lastName("Rand").age(22).email("ada@ffds.ru").build(),
-                Student.builder().firstName("Oleg").lastName("FRE").age(24).email("ooooooo@ffds.ru").build(),
-                Student.builder().firstName("Maxin").lastName("Protor").age(19).email("max@yandex.ru").build()
-        );
+        return service.findAllStudents();
     }
 
+    @PostMapping
+    public String saveStudent(@RequestBody Student student) {
+        service.saveStudent(student);
+        return "Student successfully append";
+    }
 
+    @GetMapping("/{email}")
+    public Student findStudent(@PathVariable String email) {
+        return service.findByEmail(email);
+    }
 
+    @PutMapping
+    public Student updateStudent(@RequestBody Student student) {
+        return service.updateStudent(student);
+    }
+
+    @DeleteMapping("/{email}")
+    public String deleteStudent(@PathVariable String email) {
+        service.deleteStudent(email);
+        return "Student successfully deleted";
+    }
 
 }
