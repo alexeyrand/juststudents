@@ -29,6 +29,6 @@ public class Student {
     private int age;
     @ManyToOne
     @JoinColumn(name = "university_id")
-    University university;
+    private University university;
 
 }

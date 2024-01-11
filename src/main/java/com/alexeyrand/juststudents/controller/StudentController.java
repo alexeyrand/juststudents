@@ -2,43 +2,53 @@ package com.alexeyrand.juststudents.controller;
 
 
 import com.alexeyrand.juststudents.model.Student;
+import com.alexeyrand.juststudents.model.University;
 import com.alexeyrand.juststudents.service.StudentService;
+import com.alexeyrand.juststudents.service.UniversityService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/students")
+@RequestMapping("/api/v1")
 @AllArgsConstructor
 public class StudentController {
 
-    private final StudentService service;
+    private final StudentService studentService;
+    private final UniversityService universityService;
 
-    @GetMapping
+    public static final String GET_ALL_STUDENTS = "/universities/students";
+    public static final String GET_STUDENTS_FROM_UNIVERSITY = "/universities/{university_id}/students";
+    public static final String GET_STUDENT = "/universities/{university_id}/students/{student_email}";
+    public static final String POST_STUDENT = "/universities/{university_id}/students";
+
+    @GetMapping(GET_ALL_STUDENTS)
     public List<Student> findAllStudents() {
-        return service.findAllStudents();
+        return studentService.findAllStudents();
     }
 
-    @PostMapping
-    public String saveStudent(@RequestBody Student student) {
-        service.saveStudent(student);
+    @PostMapping(POST_STUDENT)
+    public String saveStudent(@RequestBody Student student, @PathVariable(name = "university_id") Long university_id) {
+        University university = universityService.findById(university_id);
+        student.setUniversity(university);
+        studentService.saveStudent(student);
         return "Student successfully append";
     }
 
     @GetMapping("/{email}")
     public Student findStudent(@PathVariable String email) {
-        return service.findByEmail(email);
+        return studentService.findByEmail(email);
     }
 
     @PutMapping
     public Student updateStudent(@RequestBody Student student) {
-        return service.updateStudent(student);
+        return studentService.updateStudent(student);
     }
 
     @DeleteMapping("/{email}")
     public String deleteStudent(@PathVariable String email) {
-        service.deleteStudent(email);
+        studentService.deleteStudent(email);
         return "Student successfully deleted";
     }
 
