@@ -1,7 +1,6 @@
 package com.alexeyrand.juststudents.service.impl;
 
-import com.alexeyrand.juststudents.model.Student;
-import com.alexeyrand.juststudents.repository.StudentDAO;
+import com.alexeyrand.juststudents.model.StudentEntity;
 import com.alexeyrand.juststudents.repository.StudentRepository;
 import com.alexeyrand.juststudents.repository.UniversityRepository;
 import com.alexeyrand.juststudents.service.StudentService;
@@ -19,23 +18,23 @@ public class StudentServiceImpl implements StudentService {
     private StudentRepository studentRepository;
     private UniversityRepository universityRepository;
     @Override
-    public List<Student> findAllStudents() {
+    public List<StudentEntity> findAllStudents() {
         return studentRepository.findAll();
     }
 
     @Override
-    public void saveStudent(Student student) {
+    public void saveStudent(StudentEntity student) {
         studentRepository.save(student);
 
     }
 
     @Override
-    public Student findByEmail(String email) {
+    public StudentEntity findByEmail(String email) {
         return studentRepository.findByEmail(email);
     }
 
     @Override
-    public Student updateStudent(Student student) {
+    public StudentEntity updateStudent(StudentEntity student) {
         return studentRepository.save(student);
     }
 

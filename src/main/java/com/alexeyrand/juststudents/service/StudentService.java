@@ -1,13 +1,13 @@
 package com.alexeyrand.juststudents.service;
 
-import com.alexeyrand.juststudents.model.Student;
+import com.alexeyrand.juststudents.model.StudentEntity;
 
 import java.util.List;
 
 public interface StudentService {
-    List<Student> findAllStudents();
-    void saveStudent(Student student);
-    Student findByEmail(String email);
-    Student updateStudent(Student student);
+    List<StudentEntity> findAllStudents();
+    void saveStudent(StudentEntity student);
+    StudentEntity findByEmail(String email);
+    StudentEntity updateStudent(StudentEntity student);
     void deleteStudent(String email);
 }

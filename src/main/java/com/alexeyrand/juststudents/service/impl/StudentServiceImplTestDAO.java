@@ -1,6 +1,6 @@
 package com.alexeyrand.juststudents.service.impl;
 
-import com.alexeyrand.juststudents.model.Student;
+import com.alexeyrand.juststudents.model.StudentEntity;
 import com.alexeyrand.juststudents.repository.StudentDAO;
 import com.alexeyrand.juststudents.service.StudentService;
 import lombok.AllArgsConstructor;
@@ -16,23 +16,23 @@ public class StudentServiceImplTestDAO implements StudentService {
 
 
     @Override
-    public void saveStudent(Student student) {
+    public void saveStudent(StudentEntity student) {
         repository.saveStudent(student);
 
     }
 
     @Override
-    public Student findByEmail(String email) {
+    public StudentEntity findByEmail(String email) {
         return repository.findByEmail(email);
     }
 
     @Override
-    public Student updateStudent(Student student) {
+    public StudentEntity updateStudent(StudentEntity student) {
         return repository.updateStudent(student);
     }
 
     @Override
-    public List<Student> findAllStudents() {
+    public List<StudentEntity> findAllStudents() {
         return repository.findAllStudents();
     }
 

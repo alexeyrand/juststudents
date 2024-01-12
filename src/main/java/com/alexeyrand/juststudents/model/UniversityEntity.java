@@ -1,5 +1,6 @@
 package com.alexeyrand.juststudents.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,12 +15,18 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "university")
-public class University {
+public class UniversityEntity {
 
     @Id
     @GeneratedValue
     private Long id;
     private String name;
+
     @OneToMany(mappedBy = "university")
-    private List<Student> students = new ArrayList<>();
+    @JsonManagedReference
+    private List<StudentEntity> students = new ArrayList<>();
+
+    public void addStudent(StudentEntity student) {
+        students.add(student);
+    }
 }

@@ -1,6 +1,7 @@
 package com.alexeyrand.juststudents.service.impl;
 
-import com.alexeyrand.juststudents.model.University;
+import com.alexeyrand.juststudents.factories.UniversityDtoFactory;
+import com.alexeyrand.juststudents.model.UniversityEntity;
 import com.alexeyrand.juststudents.repository.UniversityRepository;
 import com.alexeyrand.juststudents.service.UniversityService;
 import lombok.AllArgsConstructor;
@@ -14,25 +15,27 @@ import java.util.Optional;
 public class UniversityServiceImpl implements UniversityService {
 
     private UniversityRepository repository;
+    private UniversityDtoFactory universityDtoFactory;
 
     @Override
-    public List<University> findAllUniversities() {
+    public List<UniversityEntity> findAllUniversities() {
         return repository.findAll();
     }
 
     @Override
-    public University saveUniversity(University university) {
+    public UniversityEntity saveUniversity(UniversityEntity university) {
         return repository.save(university);
     }
 
     @Override
-    public University findById(Long id) {
-        Optional<University> universityOptional = repository.findById(id);
+    public UniversityEntity findById(Long id) {
+        Optional<UniversityEntity> universityOptional = repository.findById(id);
         return universityOptional.orElse(null);
+
     }
 
     @Override
-    public University updateStudent(University university) {
+    public UniversityEntity updateStudent(UniversityEntity university) {
         return repository.saveAndFlush(university);
     }
 

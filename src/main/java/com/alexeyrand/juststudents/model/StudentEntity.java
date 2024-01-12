@@ -1,10 +1,10 @@
 package com.alexeyrand.juststudents.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.Instant;
 import java.time.LocalDate;
 
 
@@ -16,7 +16,7 @@ import java.time.LocalDate;
 @Builder
 @Entity
 @Table(name = "students")
-public class Student {
+public class StudentEntity {
     @Id
     @GeneratedValue
     private Long id;
@@ -29,6 +29,7 @@ public class Student {
     private int age;
     @ManyToOne
     @JoinColumn(name = "university_id")
-    private University university;
+    @JsonBackReference
+    private UniversityEntity university;
 
 }

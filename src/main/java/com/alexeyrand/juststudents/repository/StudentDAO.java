@@ -1,6 +1,6 @@
 package com.alexeyrand.juststudents.repository;
 
-import com.alexeyrand.juststudents.model.Student;
+import com.alexeyrand.juststudents.model.StudentEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -9,21 +9,21 @@ import java.util.stream.IntStream;
 
 @Repository
 public class StudentDAO {
-    public List<Student> STUDENTS = new ArrayList<>();
+    public List<StudentEntity> STUDENTS = new ArrayList<>();
 
-    public Student saveStudent(Student student) {
+    public StudentEntity saveStudent(StudentEntity student) {
         STUDENTS.add(student);
         return student;
     }
 
-    public Student findByEmail(String email) {
+    public StudentEntity findByEmail(String email) {
         return STUDENTS.stream()
                 .filter(student -> student.getEmail().equals(email))
                 .findFirst()
                 .orElse(null);
     }
 
-    public Student updateStudent(Student student) {
+    public StudentEntity updateStudent(StudentEntity student) {
         var studentId = IntStream.range(0, STUDENTS.size())
                 .filter(index -> STUDENTS.get(index).getEmail().equals(student.getEmail()))
                 .findFirst()
@@ -35,7 +35,7 @@ public class StudentDAO {
         return null;
     }
 
-    public List<Student> findAllStudents() {
+    public List<StudentEntity> findAllStudents() {
         return STUDENTS;
     }
 
